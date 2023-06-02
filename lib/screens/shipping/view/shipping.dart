@@ -49,6 +49,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
   Widget addressBox(int index)
   {
     return Container(
+      margin: EdgeInsets.only(top: 10,bottom: 10),
       height: 20.h,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -69,7 +70,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
             () => Container(
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.only(left: 15.sp,right: 15.sp),
-              height: 12.h,
+              height: 14.h,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
