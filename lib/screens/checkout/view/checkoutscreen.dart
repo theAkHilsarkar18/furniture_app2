@@ -69,7 +69,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             SizedBox(height: 2.h,),
             totalBox(),
             Spacer(),
-            checkoutBox(),
+            InkWell(onTap: () {
+
+              Get.toNamed('/success');
+
+            },child: checkoutBox()),
           ],
         ),
       ),

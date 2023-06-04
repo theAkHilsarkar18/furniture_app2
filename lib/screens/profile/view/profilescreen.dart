@@ -7,12 +7,21 @@ import 'package:sizer/sizer.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileController profileController = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileController.getUserDetail();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,17 +38,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    radius: 32.sp,
-                    backgroundImage: AssetImage('assets/signin/girl.jpg'),
+                  Obx(
+                    () => CircleAvatar(
+                      radius: 32.sp,
+                      backgroundImage: profileController.img.isEmpty?NetworkImage('https://1fid.com/wp-content/uploads/2022/06/cool-profile-picture-2-1024x1024.jpg'):NetworkImage('${profileController.img.value}'),
+                    ),
                   ),
                   SizedBox(width: 4.w,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hetal Sarkar',style: GoogleFonts.overpass(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w700,letterSpacing: 1)),
-                      Text('hetalsarlar18@gmail.com',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 11.sp,)),
-                    ],
+                  Obx(
+                    () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('${profileController.name.value}',style: GoogleFonts.overpass(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w700,letterSpacing: 1)),
+                        Text('${profileController.email.value}',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 11.sp,)),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -65,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 else if(index==4)
                   {
-                    Get.toNamed('/order');
+                    Get.toNamed('/setting');
                   }
               },
               child: profileMenuBox(

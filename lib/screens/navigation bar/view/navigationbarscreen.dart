@@ -39,7 +39,7 @@ class _NavigationbarScreenState extends State<NavigationbarScreen> {
   Container navigationBar()
   {
     return Container(
-      height: 7.h,
+      height: 8.h,
       width: double.infinity,
       decoration: BoxDecoration(color: Colors.white),
       child: Row(
@@ -73,9 +73,9 @@ class _NavigationbarScreenState extends State<NavigationbarScreen> {
           },child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.sell_outlined,size:navigationController.navigationBarIndex.value==2?30:25,color: navigationController.navigationBarIndex==2?Colors.black87:Colors.grey,),
+              Icon(Icons.notifications_none,size:navigationController.navigationBarIndex.value==2?30:25,color: navigationController.navigationBarIndex==2?Colors.black87:Colors.grey,),
               SizedBox(height: 1,),
-              Text('Offer',style: GoogleFonts.overpass(fontSize: 12,color: navigationController.navigationBarIndex==2?Colors.black87:Colors.grey)),
+              Text('Notification',style: GoogleFonts.overpass(fontSize: 12,color: navigationController.navigationBarIndex==2?Colors.black87:Colors.grey)),
             ],
           )),
           InkWell(onTap: () {

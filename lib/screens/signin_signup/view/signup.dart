@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/signin_signup/controller/signupcontroller.dart';
+import 'package:furniture_shopping_app/utils/firebase_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -115,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: Obx(
                       () => TextFormField(
-                    controller: txtPassword,
+                    controller: txtConfPassword,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: signupController.isVisible.value,
                     obscuringCharacter: '#',
@@ -139,14 +141,36 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               SizedBox(height: 30,),
-              InkWell(onTap: () {
-                Get.back();
-              },child: Container(padding: EdgeInsets.only(left: 10,right: 10),width: double.infinity,child: Image.asset('assets/signin/signup.png',fit: BoxFit.cover,))),
-              SizedBox(height: 20,),
+              InkWell(onTap: () async {
+                String pass1 = txtPassword.text;
+                String confpass = txtConfPassword.text;
+                if(pass1==confpass)
+                {
+                  String email = txtEmail.text;
+                  String password = txtPassword.text;
+                  String name = txtName.text;
+                  String msg = await FirebaseHelper.firebaseHelper.signUp(email: email, password: password, name: name);
+                  if(msg=='Success')
+                  {
+                    print('$msg');
+                    Get.back();
+                  }
+                  else
+                  {
+                    Get.snackbar('error 401', '$msg');
+                  }
+                }
+                else
+                {
+                  Get.snackbar('error 401', 'Password and confirm password does not match !');
+                }
+
+              },child: signUpBox()),
+              SizedBox(height: 5.h,),
               InkWell(
                 onTap: () {
                   Get.back();
-                },
+                  },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -161,4 +185,21 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
     );
   }
+
+
+  Widget signUpBox()
+  {
+    return Container(
+      margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),
+      height: 7.h,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      alignment: Alignment.center,
+      child: Text('Sign up',style: GoogleFonts.overpass(color: Colors.white,letterSpacing: 1,fontSize: 13.sp)),
+    );
+  }
+
 }

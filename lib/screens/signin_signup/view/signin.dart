@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/signin_signup/controller/signincontroller.dart';
+import 'package:furniture_shopping_app/utils/firebase_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({Key? key}) : super(key: key);
@@ -101,16 +103,52 @@ class _SigninScreenState extends State<SigninScreen> {
                 SizedBox(height: 20,),
                 Center(child: Text('Forgot Password',style: GoogleFonts.poppins(color: Colors.black54,fontSize: 14,letterSpacing: 1))),
                 SizedBox(height: 20,),
-                InkWell(onTap: () {
-                  Get.offAndToNamed('/bar');
-                },child: Container(padding: EdgeInsets.only(left: 10,right: 10),width: double.infinity,child: Image.asset('assets/signin/login.png',fit: BoxFit.cover,))),
+                InkWell(onTap: () async {
+                  String email = txtEmail.text;
+                  String password = txtPassword.text;
+                  if(email.isEmpty && password.isEmpty)
+                    {
+                      Get.snackbar('Email and Password are empty', 'Please enter a valid email and password!');
+                    }
+                  else if(email.isEmpty)
+                    {
+                      Get.snackbar('Email is empty', 'Please enter email address !');
+                    }
+                  else if(password.isEmpty)
+                    {
+                      Get.snackbar('Password is empty', 'Please enter password !');
+                    }
+                  else if(email.isNotEmpty && password.isNotEmpty)
+                    {
+                      String msg = await FirebaseHelper.firebaseHelper.signIn(email: email, password: password);
+                      if(msg=='Success')
+                        {
+                          Get.offAndToNamed('/bar');
+                        }
+                      else
+                        {
+                          Get.snackbar('error 401', '$msg');
+                        }
+                    }
+
+                },child: signInBox()),
                 SizedBox(height: 20,),
                 InkWell(onTap: () {
                   Get.toNamed('/signup');
                 },child: Center(child: Text('Sign Up',style: GoogleFonts.poppins(color: Colors.black54,fontSize: 14,letterSpacing: 1)))),
                 SizedBox(height: 20,),
                 Text('OR',style: GoogleFonts.poppins(color: Colors.black54,fontSize: 10,letterSpacing: 1)),
-                Image.asset('assets/signin/google.png',height: 60,),
+                InkWell(onTap: () async {
+                  String msg = await FirebaseHelper.firebaseHelper.googleSignIn();
+                  if(msg=='Success')
+                    {
+                      Get.offAndToNamed('/bar');
+                    }
+                  else
+                    {
+                      Get.snackbar('error 12501', '$msg');
+                    }
+                },child: Image.asset('assets/signin/google.png',height: 60,)),
               ],
             ),
           ),
@@ -118,4 +156,21 @@ class _SigninScreenState extends State<SigninScreen> {
       ),
     );
   }
+
+
+  Widget signInBox()
+  {
+    return Container(
+      margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),
+      height: 7.h,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      alignment: Alignment.center,
+      child: Text('Log in',style: GoogleFonts.overpass(color: Colors.white,letterSpacing: 1,fontSize: 13.sp)),
+    );
+  }
+
 }

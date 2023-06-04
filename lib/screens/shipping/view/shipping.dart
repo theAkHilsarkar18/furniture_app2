@@ -20,7 +20,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-
+            Get.toNamed('/address');
           },
           backgroundColor: Colors.black,
           child: Icon(Icons.add,color: Colors.white),
@@ -42,7 +42,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
         ),
         body: ListView.builder(itemBuilder: (context, index) => InkWell(onTap: () {
           shippingController.selectAddress(index+1);
-        },child: addressBox(index+1)),itemCount: 13),
+        },child: addressBox(index+1)),itemCount: 3),
       ),
     );
   }

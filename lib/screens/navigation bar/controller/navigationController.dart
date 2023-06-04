@@ -3,13 +3,15 @@ import 'package:furniture_shopping_app/screens/home/view/homescreen.dart';
 import 'package:furniture_shopping_app/screens/profile/view/profilescreen.dart';
 import 'package:get/get.dart';
 
+import '../../bell/view/bellscreen.dart';
+
 class NavigationController extends GetxController
 {
   RxInt navigationBarIndex = 0.obs;
   RxList screenList = [
     Homescreen(),
     FavouriteScreen(),
-    Homescreen(),
+    BellScreen(),
     ProfileScreen(),
   ].obs;
 }

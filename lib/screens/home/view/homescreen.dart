@@ -51,6 +51,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ],
                   ),
+
                   InkWell(onTap: () {
                     Get.toNamed('/cart');
                   },child: Icon(Icons.shopping_cart_outlined,color: Colors.grey,size: 20.sp,)),
@@ -135,18 +136,18 @@ class _HomescreenState extends State<Homescreen> {
           SizedBox(height: 2,),
           Stack(
             children: [
-              Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset('$pImg',fit: BoxFit.cover,))),
+              Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.asset('$pImg',fit: BoxFit.cover,))),
               Transform.translate(
-                offset: Offset(16.h,45.w),
+                offset: Offset(15.h,47.w),
                 child: Container(
                   height: 5.h,
-                  width: 10.w,
+                  width: 11.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(5),
                       color: Colors.white60
                   ),
                   alignment: Alignment.center,
-                  child: Icon(Icons.shopping_bag,color: Colors.black,size: 13.sp),
+                  child: Icon(Icons.favorite,color: Colors.black,size: 13.sp),
                 ),
               ),
             ],
