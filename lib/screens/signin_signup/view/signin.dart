@@ -148,7 +148,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     {
                       Get.snackbar('error 12501', '$msg');
                     }
-                },child: Image.asset('assets/signin/google.png',height: 60,)),
+                },child: Image.asset('assets/signin/google.png',height: 50,)),
               ],
             ),
           ),

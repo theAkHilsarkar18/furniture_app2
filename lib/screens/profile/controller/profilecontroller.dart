@@ -21,5 +21,7 @@ class ProfileController extends GetxController
     name.value = m1['name'];
     email.value = m1['email'];
     img.value = m1['img'];
+    print('$name ============');
+    print('$img ==================');
   }
 }

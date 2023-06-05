@@ -41,35 +41,32 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Spacer(),
               Container(
-                height: 18.h,
-                width: 40.w,
-                child: Image.asset('assets/logo/logo.png'),
+                height: 32.h,
+                width: 100.w,
+                child: Image.asset('assets/logo/splash.png'),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Lovely',
-                      style: GoogleFonts.kalam(
-                          color: Color(0xffff5256),
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.w700)),
-                  Text('Rooms',
-                      style: GoogleFonts.pacifico(
-                          color: Colors.blue,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700)),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text('Lovely',
+              //         style: GoogleFonts.kalam(
+              //             color: Color(0xffff5256),
+              //             fontSize: 25.sp,
+              //             fontWeight: FontWeight.w700)),
+              //     Text('Rooms',
+              //         style: GoogleFonts.pacifico(
+              //             color: Colors.blue,
+              //             fontSize: 20.sp,
+              //             fontWeight: FontWeight.w700)),
+              //   ],
+              // ),
               Spacer(),
               Text('by TheAkhilSarkar',
                   style: GoogleFonts.poppins(
-                      color: Colors.black, fontSize: 15.sp)),
+                      color: Colors.black54, fontSize: 13.sp)),
               SizedBox(
                 height: 1.h,
               ),
-              LinearProgressIndicator(
-                  color: Color(0xffff5256),
-                  backgroundColor: Colors.pink.shade200),
             ],
           ),
         ),

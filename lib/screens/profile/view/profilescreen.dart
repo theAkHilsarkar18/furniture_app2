@@ -40,18 +40,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Obx(
                     () => CircleAvatar(
+
                       radius: 32.sp,
                       backgroundImage: profileController.img.isEmpty?NetworkImage('https://1fid.com/wp-content/uploads/2022/06/cool-profile-picture-2-1024x1024.jpg'):NetworkImage('${profileController.img.value}'),
                     ),
                   ),
                   SizedBox(width: 4.w,),
                   Obx(
-                    () => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('${profileController.name.value}',style: GoogleFonts.overpass(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w700,letterSpacing: 1)),
-                        Text('${profileController.email.value}',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 11.sp,)),
-                      ],
+                    () => Container(
+                      width: 70.w,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${profileController.name.value}',overflow: TextOverflow.ellipsis,style: GoogleFonts.overpass(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w700,letterSpacing: 1)),
+                          Text('${profileController.email.value}',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 11.sp,),overflow: TextOverflow.ellipsis),
+                        ],
+                      ),
                     ),
                   )
                 ],

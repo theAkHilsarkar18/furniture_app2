@@ -37,7 +37,7 @@ async {
           useMaterial3: true,
           textTheme: TextTheme()
         ),
-        initialRoute: '/operation',
+        initialRoute: '/',
         debugShowCheckedModeBanner: false,
         getPages: [
           GetPage(name: '/',page: () => SplashScreen(),transition: Transition.cupertinoDialog),
