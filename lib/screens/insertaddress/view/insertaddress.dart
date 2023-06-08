@@ -27,6 +27,7 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
           leading: InkWell(onTap: () {
             Get.back();

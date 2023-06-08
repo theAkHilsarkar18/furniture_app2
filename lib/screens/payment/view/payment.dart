@@ -22,6 +22,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         },child: Icon(Icons.add,color: Colors.white,),backgroundColor: Colors.black,),
         backgroundColor: Colors.white,
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Text('Payment method',

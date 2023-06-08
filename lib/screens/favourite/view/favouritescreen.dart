@@ -21,15 +21,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: InkWell(onTap: () {
-            navigationController.navigationBarIndex.value = 0;
-          },child: Icon(Icons.arrow_back_outlined,color: Colors.black,size: 20.sp)),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.more_vert,color: Colors.black,size: 20.sp),
-            ),
-          ],
+          surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,

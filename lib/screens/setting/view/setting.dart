@@ -18,6 +18,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
           leading: InkWell(onTap: () {
             Get.back();

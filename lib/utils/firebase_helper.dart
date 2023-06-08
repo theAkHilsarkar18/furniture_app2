@@ -108,9 +108,8 @@ class FirebaseHelper
   OpController opController = Get.put(OpController());
   void deleteFurnitureData()
   {
-
     firebaseFirestore.collection('LovelyRoom').doc('Data').collection('ProductList').doc('${opController.docId.value}').delete();
-
   }
+
 
 }

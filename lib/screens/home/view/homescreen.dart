@@ -59,21 +59,8 @@ class _HomescreenState extends State<Homescreen> {
               ),
             ),
             // category filter selected
-            Stack(
+            Row(
               children: [
-                Container(
-                    height: 11.h,
-                    alignment: Alignment.center,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => categoryBox(
-                        homeController.categoryList[index],
-                        homeController.categoryNameList[index],
-                      ),
-                      itemCount: homeController.categoryList.length,
-                      scrollDirection: Axis.horizontal,
-                    )),
                 Container(
                   padding: EdgeInsets.only(left: 5),
                   height: 11.h,
@@ -86,6 +73,21 @@ class _HomescreenState extends State<Homescreen> {
                         size: 18.sp,
                       ),
                       'Favourite'),
+                ),
+                Expanded(
+                  child: Container(
+                      height: 11.h,
+                      alignment: Alignment.center,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) => categoryBox(
+                          homeController.categoryList[index],
+                          homeController.categoryNameList[index],
+                        ),
+                        itemCount: homeController.categoryList.length,
+                        scrollDirection: Axis.horizontal,
+                      )),
                 ),
               ],
             ),
