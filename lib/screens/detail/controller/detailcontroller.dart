@@ -4,17 +4,20 @@ class DetailController extends GetxController
 {
   RxInt productIndex = 0.obs;
   RxInt productQuantity = 1.obs;
+  RxInt productPrice = 0.obs;
 
-  void incrementQuantity()
+  void incrementQuantity( )
   {
     productQuantity.value++;
+
   }
 
   void decrementQuantity()
   {
-    if(productQuantity.value > 0)
+    if(productQuantity.value > 1)
       {
         productQuantity.value--;
+
       }
   }
 

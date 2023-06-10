@@ -1,5 +1,10 @@
 class HomeModel
 {
-  String? productName,productPrice,productImg,productRating;
-  HomeModel({this.productName,this.productImg,this.productPrice,this.productRating});
+  String? name,description,img,userId,productId;
+  int? rating,stock,categoryId,price,quantity;
+
+  HomeModel({this.name,this.quantity,this.description,this.price,this.rating,this.stock,this.img,this.categoryId,this.userId,this.productId});
+
+
+
 }

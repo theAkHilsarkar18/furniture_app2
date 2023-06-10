@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/home/controller/homecontroller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../utils/firebase_helper.dart';
+import '../../home/model/homemodel.dart';
 
 class BellScreen extends StatefulWidget {
   const BellScreen({super.key});
@@ -26,9 +30,38 @@ class _BellScreenState extends State<BellScreen> {
           centerTitle: true,
           title: Text('Notification',style: GoogleFonts.overpass(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w500)),
         ),
-        body: ListView.builder(itemBuilder: (context, index) => notificationBox(
-          homeController.productList[index].productImg!
-        ),itemCount: 5,),
+        body: StreamBuilder(
+          stream: FirebaseHelper.firebaseHelper.readProductData(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            } else if (snapshot.hasData) {
+              QuerySnapshot? querySnapshot = snapshot.data;
+              homeController.productList.clear();
+              for (var x in querySnapshot!.docs) {
+                Map data = x.data() as Map;
+                HomeModel h1 = HomeModel(
+                    productId: x.id,
+                    name: data['name'],
+                    price: data['price'],
+                    description: data['description'],
+                    img: data['img'],
+                    stock: int.parse(data['stock']),
+                    rating: int.parse(data['rating']),
+                    categoryId: data['categoryId'],
+                    userId: '${homeController.userId.value}');
+
+                homeController.productList.add(h1);
+              }
+              return ListView.builder(itemBuilder: (context, index) => notificationBox(
+                  homeController.productList[index].img!
+              ),itemCount: 5,);
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
+
+
       ),
     );
   }
@@ -53,7 +86,7 @@ class _BellScreenState extends State<BellScreen> {
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset('$img',fit: BoxFit.cover,)),
+                child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.network('$img',fit: BoxFit.cover,)),
               ),
               SizedBox(width: 2.w,),
               Column(

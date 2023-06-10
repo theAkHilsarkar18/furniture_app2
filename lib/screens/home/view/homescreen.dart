@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/detail/controller/detailcontroller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/firebase_helper.dart';
 import '../controller/homecontroller.dart';
+import '../model/homemodel.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -91,35 +94,70 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ],
             ),
+
+
+
             // product grid view
             Expanded(
               child: Container(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 10),
                 height: 68.h,
                 width: MediaQuery.of(context).size.width,
-                //color: Colors.grey,
-                child: GridView.builder(
-                  physics: BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 9/16,
-                    crossAxisCount: 2,
-                  ),
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      Get.toNamed('/detail');
-                      detailController.productIndex.value = index;
-                    },
-                    child: productBox(
-                      homeController.productList[index].productName!,
-                      homeController.productList[index].productImg!,
-                      homeController.productList[index].productPrice!,
-                      homeController.productList[index].productRating!,
-                    ),
-                  ),
-                  itemCount: homeController.productList.length,
+                child: StreamBuilder(
+                  stream: FirebaseHelper.firebaseHelper.readProductData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      QuerySnapshot? querySnapshot = snapshot.data;
+
+                      List<HomeModel> productList = [];
+                      for (var x in querySnapshot!.docs) {
+                        Map data = x.data() as Map;
+                        HomeModel h1 = HomeModel(
+                            productId: x.id,
+                            name: data['name'],
+                            price: data['price'],
+                            description: data['description'],
+                            img: data['img'],
+                            stock: int.parse(data['stock']),
+                            rating: int.parse(data['rating']),
+                            categoryId: data['categoryId'],
+                            userId: '${homeController.userId.value}');
+
+                        productList.add(h1);
+                      }
+                       return GridView.builder(
+                        physics: BouncingScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 9/16,
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            // detailController.productIndex.value = index;
+                            // print('product index ${detailController.productIndex.value}');
+
+                            Get.toNamed('/detail',arguments: productList[index]);
+                          },
+                          child: productBox(
+                            productList[index].name!,
+                            productList[index].img!,
+                            productList[index].price!,
+                            productList[index].rating!,
+                          ),
+                        ),
+                        itemCount: productList.length,
+                      );
+
+                      // return ListView.builder(itemBuilder: (context, index) => Text('data'),itemCount: 5,);
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 ),
+
               ),
             ),
           ],
@@ -129,31 +167,14 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget productBox(String pName, String pImg, String price, String rating) {
+  Widget productBox(String pName,String pImg, int price, int rating) {
     return Container(
       //color: Colors.grey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 2,),
-          Stack(
-            children: [
-              Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.asset('$pImg',fit: BoxFit.cover,))),
-              Transform.translate(
-                offset: Offset(15.h,47.w),
-                child: Container(
-                  height: 5.h,
-                  width: 11.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white60
-                  ),
-                  alignment: Alignment.center,
-                  child: Icon(Icons.favorite,color: Colors.black,size: 13.sp),
-                ),
-              ),
-            ],
-          ),
+          Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
           SizedBox(height: 1.h,),
           Container(
             width: 50.w,
@@ -163,26 +184,39 @@ class _HomescreenState extends State<Homescreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('$pName',
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.overpass(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12.sp)),
-                SizedBox(height: 2,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('\$ $price',
+                    Text('$pName',
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.overpass(
-                            color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12.sp)),
-                    Spacer(),
-                    Text('$rating',
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.overpass(
-                            color: Colors.black, fontWeight: FontWeight.w500,fontSize: 12.sp)),
-                    Icon(Icons.star,size: 15.sp,color: Colors.amber,)
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp)),
+                    Icon(Icons.favorite,size: 15.sp,color: Colors.red),
                   ],
+                ),
+                SizedBox(height: 2,),
+                Container(
+                  height: 4.h,
+                  alignment: Alignment.center,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    children: [
+                      Text('\$ $price',
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.overpass(
+                              color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12.sp)),
+                      Spacer(),
+                      Text('$rating.8',
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.overpass(
+                              color: Colors.black, fontWeight: FontWeight.w500,fontSize: 11.sp)),
+                      SizedBox(width: 1,),
+                      Icon(Icons.star,size: 13.sp,color: Colors.amber,)
+                    ],
+                  ),
                 ),
               ],
             ),

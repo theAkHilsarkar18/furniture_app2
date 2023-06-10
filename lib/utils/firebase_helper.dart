@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:furniture_shopping_app/screens/bell/view/bellscreen.dart';
 import 'package:furniture_shopping_app/screens/operation/controller/opcontroller.dart';
 import 'package:furniture_shopping_app/screens/profile/controller/profilecontroller.dart';
 import 'package:get/get.dart';
@@ -70,10 +71,15 @@ class FirebaseHelper
   }
 
   /// get user detail
+  String? userId;
   Future<Map> getUserDetail()
   async {
+
     User? user  = await firebaseAuth.currentUser;
-    String? email = user!.email;
+   userId = user!.uid;
+    // homeController.userId.value = user!.uid;
+    print('${userId}------------userid--------');
+    String? email = user.email;
     String? img = user.photoURL;
     String? name = user.displayName;
     Map m1 = {'email':email,'img':img,'name':name};
@@ -85,30 +91,38 @@ class FirebaseHelper
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
 
-  /// add data into firestore
-  void addFurnitureData()
+  /// read data from firestore for main product list
+  Stream<QuerySnapshot<Map<String, dynamic>>> readProductData()
   {
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('ProductList').add({'name': 'Akhil'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('FavouriteList').add({'name': 'Hetal'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('CartList').add({'name': 'Cart'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('OrderList').add({'name': 'Cart'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('AddressList').add({'name': 'Address'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('PaymentList').add({'name': 'Payment'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('ReviewList').add({'name': 'Review'});
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('NotificationList').add({'name': 'Notification'});
+    return firebaseFirestore.collection('ProductList').snapshots();
   }
 
-  /// read data from firestore
-  Stream<QuerySnapshot<Map<String, dynamic>>> readFurnitureData()
-  {
-    return firebaseFirestore.collection('LovelyRoom').doc('Data').collection('ProductList').snapshots();
+  // TODO add data in add to cart
+
+  Future<void> addToCartProduct(Map<String,dynamic> m1)
+  async {
+    await firebaseFirestore.collection('AddToCart').doc(userId).collection('Cart').add(m1);
   }
 
-  /// delete data from firestore
-  OpController opController = Get.put(OpController());
-  void deleteFurnitureData()
+// TODO read data from add to cart
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readDataFromAddToCart()
   {
-    firebaseFirestore.collection('LovelyRoom').doc('Data').collection('ProductList').doc('${opController.docId.value}').delete();
+    return firebaseFirestore.collection('AddToCart').doc(userId).collection('Cart').snapshots();
+  }
+
+  // TODO delete data from cart
+
+  Future<void> deleteCartData(String docId)
+  async {
+    await firebaseFirestore.collection('AddToCart').doc(userId).collection('Cart').doc(docId).delete();
+  }
+
+  // TODO Checkout add data
+
+  Future<void> checkOutProduct(Map<String, dynamic> m1)
+  async {
+    await firebaseFirestore.collection('CheckOut').doc(userId).collection('CheckOutProducts').add(m1);
   }
 
 

@@ -2,19 +2,21 @@ import 'package:get/get.dart';
 
 class CartController extends GetxController
 {
-  RxInt productQuantity = 1.obs;
+  RxInt cartQuantity = 1.obs;
   RxInt productIndex = 0.obs;
+  RxInt total = 0.obs;
+  List<int> priceList = [];
 
   void incrementQuantity()
   {
-    productQuantity.value++;
+    cartQuantity.value++;
   }
 
   void decrementQuantity()
   {
-    if(productQuantity.value > 0)
+    if(cartQuantity.value > 1)
     {
-      productQuantity.value--;
+      cartQuantity.value--;
     }
   }
 }
