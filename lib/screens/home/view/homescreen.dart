@@ -24,6 +24,10 @@ class _HomescreenState extends State<Homescreen> {
   DetailController detailController = Get.put(DetailController());
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -36,7 +40,9 @@ class _HomescreenState extends State<Homescreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.search,color: Colors.grey,size: 21.sp,),
+                  InkWell(onTap: () {
+                    
+                  },child: Icon(Icons.search,color: Colors.grey,size: 21.sp,)),
                   Column(
                     children: [
                       Text(
@@ -174,7 +180,23 @@ class _HomescreenState extends State<Homescreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 2,),
-          Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
+          Stack(
+            children: [
+              Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
+              Transform.translate(offset: Offset(32.w, 21.h),child: Container(
+                height: 5.h,
+                  width: 12.w,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.white54,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(10),
+                      topLeft: Radius.circular(10)
+                    ),
+                  ),
+                  child: Icon(Icons.favorite,color: Colors.black,size: 19.sp,)),),
+            ],
+          ),
           SizedBox(height: 1.h,),
           Container(
             width: 50.w,
@@ -184,18 +206,12 @@ class _HomescreenState extends State<Homescreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('$pName',
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.overpass(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12.sp)),
-                    Icon(Icons.favorite,size: 15.sp,color: Colors.red),
-                  ],
-                ),
+                Text('$pName',
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.overpass(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp)),
                 SizedBox(height: 2,),
                 Container(
                   height: 4.h,

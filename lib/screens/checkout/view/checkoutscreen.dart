@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shopping_app/screens/home/model/homemodel.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,23 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+
+  List<HomeModel> checkOutList = [];
+  int total = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    checkOutList = Get.arguments;
+
+    for(int i=0; i<checkOutList.length; i++)
+      {
+        total = total + checkOutList[i].price!*checkOutList[i].quantity!;
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,8 +89,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Spacer(),
             InkWell(onTap: () {
 
-              Get.toNamed('/success');
 
+              Get.toNamed('/success');
             },child: checkoutBox()),
           ],
         ),
@@ -200,7 +218,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Order',style: GoogleFonts.poppins(color: Colors.grey,fontSize: 13.sp)),
-              Text('\$ 97.00',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
+              Text('\$ ${total}.00',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
             ],
           ),
           Row(
@@ -214,7 +232,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Total',style: GoogleFonts.poppins(color: Colors.grey,fontSize: 13.sp)),
-              Text('\$ 105.00',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
+              Text('\$ ${total+5}.00',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
             ],
           ),
         ],

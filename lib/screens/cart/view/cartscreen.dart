@@ -113,18 +113,25 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            Map<String, dynamic> m1 = {
-                              // 'name' : h1.name,
-                              // 'price' : h1.price,
-                              // 'quantity': detailController.productQuantity.value,
-                              // 'img' : h1.img,
-                              // 'stock' : h1.stock,
-                              // 'rating' : h1.rating,
-                              // 'description' : h1.description,
-                              // 'categoryId' : h1.categoryId,
-                            };
 
-                            Get.toNamed('/checkout');
+
+                            for(int i=0; i<cartList.length; i++)
+                              {
+                                Map<String, dynamic> m1 = {
+                                  'name' : cartList[i].name,
+                                  'price' : cartList[i].price,
+                                  'quantity': cartList[i].quantity,
+                                  'img' : cartList[i].img,
+                                  'stock' : cartList[i].stock,
+                                  'rating' : cartList[i].rating,
+                                  'description' : cartList[i].description,
+                                  'categoryId' : cartList[i].categoryId,
+                                };
+                                FirebaseHelper.firebaseHelper.checkOutProduct(m1);
+                                FirebaseHelper.firebaseHelper.deleteCheckOutProducts(cartList[i].productId!);
+                              }
+
+                            Get.toNamed('/checkout',arguments: cartList);
                           },
                           child: Container(
                             margin: EdgeInsets.only(left: 15,right: 15,bottom: 20),

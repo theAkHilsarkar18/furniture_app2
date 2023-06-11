@@ -97,7 +97,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       height: 17.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        //color: Colors.black12
+        color: Colors.white
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

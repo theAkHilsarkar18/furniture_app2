@@ -125,5 +125,27 @@ class FirebaseHelper
     await firebaseFirestore.collection('CheckOut').doc(userId).collection('CheckOutProducts').add(m1);
   }
 
+  // delete from checkout because data transferred in order
+
+  Future<void> deleteCheckOutProducts(String docId)
+  async {
+    await firebaseFirestore.collection('AddToCart').doc(userId).collection('Cart').doc(docId).delete();
+  }
+
+
+
+  /// chek out to my order for approvel of admin
+
+  Future<void> chekoutToOrderList(Map<String, dynamic> m1)
+  async {
+    await firebaseFirestore.collection('MyOrder').doc(userId).collection('General').add(m1);
+  }
+
+  /// add data in favourite list
+
+  void addToFavourites()
+  {
+
+  }
 
 }
