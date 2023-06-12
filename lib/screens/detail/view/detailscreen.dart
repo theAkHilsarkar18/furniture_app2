@@ -171,19 +171,36 @@ class _DetailscreenState extends State<Detailscreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 6.h,
-                      width: 16.w,
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(10),
+                    InkWell(
+                      onTap: () async {
+                        Map<String, dynamic> m1 = {
+                          'adminId' : h1.adminId,
+                          'name' : h1.name,
+                          'price' : h1.price,
+                          'quantity': detailController.productQuantity.value,
+                          'img' : h1.img,
+                          'stock' : h1.stock,
+                          'rating' : h1.rating,
+                          'description' : h1.description,
+                          'categoryId' : h1.categoryId,
+                        };
+
+                        await FirebaseHelper.firebaseHelper.addToFavourites(m1);
+                      },
+                      child: Container(
+                        height: 6.h,
+                        width: 15.w,
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(Icons.bookmark_border,color: Colors.black45,size: 20.sp,),
                       ),
-                      child: Icon(Icons.bookmark_border,color: Colors.black45,size: 20.sp,),
                     ),
                     SizedBox(width: 5.w,),
                     Expanded(
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
                           Map<String, dynamic> m1 = {
                             'name' : h1.name,
                             'price' : h1.price,
@@ -193,8 +210,9 @@ class _DetailscreenState extends State<Detailscreen> {
                             'rating' : h1.rating,
                             'description' : h1.description,
                             'categoryId' : h1.categoryId,
+                            'adminId' : h1.adminId,
                           };
-                          FirebaseHelper.firebaseHelper.addToCartProduct(m1);
+                          await FirebaseHelper.firebaseHelper.addToCartProduct(m1);
                           Get.back();
                         },
                         child: Container(

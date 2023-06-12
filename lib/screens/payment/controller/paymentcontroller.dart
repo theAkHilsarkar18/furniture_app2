@@ -8,4 +8,11 @@ class PaymentController extends GetxController
     isSelected.value = index;
   }
 
+  RxBool cardSide = false.obs;
+
+  void changeCardSide()
+  {
+    cardSide.value = !cardSide.value;
+  }
+
 }

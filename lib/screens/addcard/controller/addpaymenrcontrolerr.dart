@@ -7,4 +7,11 @@ class AddPaymentController extends GetxController
   RxString expDate = ''.obs;
   RxString bank = ''.obs;
   RxString cvv = ''.obs;
+
+  RxBool cardSide = false.obs;
+
+  void changeCardSide()
+  {
+    cardSide.value = !cardSide.value;
+  }
 }

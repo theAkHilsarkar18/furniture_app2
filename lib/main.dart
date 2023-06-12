@@ -5,6 +5,7 @@ import 'package:furniture_shopping_app/screens/addcard/view/addpayment.dart';
 import 'package:furniture_shopping_app/screens/bell/view/bellscreen.dart';
 import 'package:furniture_shopping_app/screens/cart/view/cartscreen.dart';
 import 'package:furniture_shopping_app/screens/checkout/view/checkoutscreen.dart';
+import 'package:furniture_shopping_app/screens/debitcard/view/debitcardscreen.dart';
 import 'package:furniture_shopping_app/screens/detail/view/detailscreen.dart';
 import 'package:furniture_shopping_app/screens/favourite/view/favouritescreen.dart';
 import 'package:furniture_shopping_app/screens/home/view/homescreen.dart';

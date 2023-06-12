@@ -5,6 +5,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/firebase_helper.dart';
+
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
 
@@ -36,6 +38,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          //leading: Icon(Icons.arrow_back,color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
@@ -88,8 +91,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             totalBox(),
             Spacer(),
             InkWell(onTap: () {
-
-
+              for(int i=0; i<checkOutList.length; i++) {
+                FirebaseHelper.firebaseHelper.deleteCheckOutProducts(
+                    checkOutList[i].productId!);
+              }
               Get.toNamed('/success');
             },child: checkoutBox()),
           ],

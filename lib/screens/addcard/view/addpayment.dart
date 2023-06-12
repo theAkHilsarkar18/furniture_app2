@@ -1,4 +1,10 @@
+import 'package:awesome_card/credit_card.dart';
+import 'package:awesome_card/style/card_background.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/credit_card_form.dart';
+import 'package:flutter_credit_card/credit_card_model.dart';
+import 'package:flutter_credit_card/credit_card_widget.dart';
+import 'package:flutter_credit_card/glassmorphism_config.dart';
 import 'package:furniture_shopping_app/screens/addcard/controller/addpaymenrcontrolerr.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +26,7 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
   TextEditingController txtDate = TextEditingController();
   TextEditingController txtBank = TextEditingController();
   TextEditingController txtNumber = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,156 +41,184 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
           title: Text('Add payment method',style: GoogleFonts.overpass(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 15.sp)),
         ),
         backgroundColor: Colors.white,
-        body: ListView(
-          children: [
-            paymentBox(),
-            SizedBox(height: 4.h,),
-            Padding(
-              padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-              child: TextFormField(
-                onChanged: (value) {
-                  addPaymentController.name.value = value;
-                },
-                maxLength: 15,
-                controller: txtName,
-                keyboardType: TextInputType.name,
-                cursorColor: Colors.black,
-                style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
-                decoration: InputDecoration(
-                  counterText: '',
-                  label: Text('CardHolder Name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey)
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.grey,width: 0.5),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-              child: TextFormField(
-                onChanged: (value) {
-                  addPaymentController.number.value = value;
-                },
-                controller: txtNumber,
-                keyboardType: TextInputType.number,
-                maxLength: 20,
-                cursorColor: Colors.black,
-                style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
-                decoration: InputDecoration(
-                  counterText: '',
-                  label: Text('Card Number',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey)
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.grey,width: 0.5),
+
+        body:  SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(height: 2.h,),
+              Obx(
+                () => InkWell(
+                  onTap: () {
+                    addPaymentController.changeCardSide();
+                  },
+                  child: CreditCard(
+                      cardNumber: "${addPaymentController.number}",
+                      cardExpiry: "${addPaymentController.expDate}",
+                      cardHolderName: "${addPaymentController.name}",
+                      cvv: "${addPaymentController.cvv}",
+                      bankName: "${addPaymentController.bank}",
+                      //cardType: CardType.mastercard,
+                      showBackSide: addPaymentController.cardSide.value,
+                      frontBackground: CardBackgrounds.black,
+                      backBackground: CardBackgrounds.black,
+                      backTextColor: Colors.white,
+                      showShadow: true,
+                      textExpDate: 'Exp. Date',
+                      textName: 'Name',
+                      textExpiry: 'MM/YY'
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-              child: TextFormField(
-                controller: txtBank,
-                keyboardType: TextInputType.name,
-                onChanged: (value) {
-                  addPaymentController.bank.value = value;
-                },
-                maxLength: 10,
-                cursorColor: Colors.black,
-                style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
-                decoration: InputDecoration(
-                  counterText: '',
-                  hintText: 'ex. HDFC',
-                  hintStyle: GoogleFonts.poppins(color: Colors.grey,fontSize: 15),
-                  suffix: Text('Bank',style: GoogleFonts.poppins(fontSize: 15,color: Colors.black)),
-                  label: Text('Bank Name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
-                  focusedBorder: OutlineInputBorder(
+              SizedBox(height: 4.h,),
+              Padding(
+                padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                child: TextFormField(
+                  onChanged: (value) {
+                    addPaymentController.name.value = value;
+                  },
+                  maxLength: 15,
+                  controller: txtName,
+                  keyboardType: TextInputType.name,
+                  cursorColor: Colors.black,
+                  style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
+                  decoration: InputDecoration(
+                    counterText: '',
+                    label: Text('CardHolder Name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
+                    ),
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey)
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding:  EdgeInsets.only(top: 10.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.sp),
-                    child: Container(
-                      width: 40.w,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          addPaymentController.cvv.value = value;
-                        },
-                        controller: txtCvv,
-                        keyboardType: TextInputType.number,
-                        maxLength: 3,
-                        cursorColor: Colors.black,
-                        style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
-                        decoration: InputDecoration(
-                          counterText: '',
-                          label: Text('CVV',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
-                          focusedBorder: OutlineInputBorder(
+              Padding(
+                padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                child: TextFormField(
+                  onChanged: (value) {
+                    addPaymentController.number.value = value;
+                  },
+                  controller: txtNumber,
+                  keyboardType: TextInputType.number,
+                  maxLength: 20,
+                  cursorColor: Colors.black,
+                  style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
+                  decoration: InputDecoration(
+                    counterText: '',
+                    label: Text('Card Number',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                child: TextFormField(
+                  controller: txtBank,
+                  keyboardType: TextInputType.name,
+                  onChanged: (value) {
+                    addPaymentController.bank.value = value;
+                  },
+                  maxLength: 10,
+                  cursorColor: Colors.black,
+                  style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
+                  decoration: InputDecoration(
+                    counterText: '',
+                    hintText: 'ex. HDFC',
+                    hintStyle: GoogleFonts.poppins(color: Colors.grey,fontSize: 15),
+                    suffix: Text('Bank',style: GoogleFonts.poppins(fontSize: 15,color: Colors.black)),
+                    label: Text('Bank Name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:  EdgeInsets.only(top: 10.sp),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.sp),
+                      child: Container(
+                        width: 40.w,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            addPaymentController.cvv.value = value;
+                          },
+                          controller: txtCvv,
+                          keyboardType: TextInputType.number,
+                          maxLength: 3,
+                          cursorColor: Colors.black,
+                          style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
+                          decoration: InputDecoration(
+                            counterText: '',
+                            label: Text('CVV',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.grey,width: 1.5)
+                            ),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.grey)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                              borderSide: BorderSide(color: Colors.grey,width: 1),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(right: 20.sp),
-                    child: Container(
-                      width: 40.w,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          addPaymentController.expDate.value = value;
-                        },
-                        controller: txtDate,
-                        maxLength: 10,
-                        keyboardType: TextInputType.datetime,
-                        cursorColor: Colors.black,
-                        style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
-                        decoration: InputDecoration(
-                          counterText: '',
-                          hintText: '10/28',
-                          hintStyle: GoogleFonts.poppins(color: Colors.grey,fontSize: 15),
-                          label: Text('Expiration Date',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 14,letterSpacing: 1)),
-                          focusedBorder: OutlineInputBorder(
+                    Padding(
+                      padding:  EdgeInsets.only(right: 15.sp),
+                      child: Container(
+                        width: 40.w,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            addPaymentController.expDate.value = value;
+                          },
+                          controller: txtDate,
+                          maxLength: 10,
+                          keyboardType: TextInputType.datetime,
+                          cursorColor: Colors.black,
+                          style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
+                          decoration: InputDecoration(
+                            counterText: '',
+                            hintText: '10/28',
+                            hintStyle: GoogleFonts.poppins(color: Colors.grey,fontSize: 15),
+                            label: Text('Expiration Date',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 14,letterSpacing: 1)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.grey,width: 1.5)
+                            ),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.grey)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                              borderSide: BorderSide(color: Colors.grey,width: 1),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            saveCardBox()
-          ],
+
+              saveCardBox()
+            ],
+          ),
         ),
       ),
     );
@@ -285,8 +320,8 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
   Widget saveCardBox()
   {
     return Container(
-      margin: EdgeInsets.only(left: 10.sp,right: 10.sp,top: 40.sp),
-      height: 7.h,
+      margin: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 40.sp),
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,

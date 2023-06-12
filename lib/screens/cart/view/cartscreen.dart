@@ -49,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
                 Map data = x.data() as Map;
                 HomeModel h1 = HomeModel(
                     productId: x.id,
+                    adminId: data['adminId'],
                     name: data['name'],
                     price: data['price'],
                     description: data['description'],
@@ -118,6 +119,7 @@ class _CartScreenState extends State<CartScreen> {
                             for(int i=0; i<cartList.length; i++)
                               {
                                 Map<String, dynamic> m1 = {
+                                  'adminId' : cartList[i].adminId,
                                   'name' : cartList[i].name,
                                   'price' : cartList[i].price,
                                   'quantity': cartList[i].quantity,
@@ -127,8 +129,8 @@ class _CartScreenState extends State<CartScreen> {
                                   'description' : cartList[i].description,
                                   'categoryId' : cartList[i].categoryId,
                                 };
+                                print('${m1['adminId']}----admin id ');
                                 FirebaseHelper.firebaseHelper.checkOutProduct(m1);
-                                FirebaseHelper.firebaseHelper.deleteCheckOutProducts(cartList[i].productId!);
                               }
 
                             Get.toNamed('/checkout',arguments: cartList);

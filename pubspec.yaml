@@ -46,6 +46,8 @@ dependencies:
   animated_flip_counter: ^0.2.5
   flutter_local_notifications: ^14.1.1
   firebase_messaging: ^14.6.2
+  flutter_credit_card: ^3.0.6
+  awesome_card: ^1.1.7
 
 
 #  csc_picker: ^0.2.7

@@ -22,11 +22,13 @@ HomeController homeController = Get.put(HomeController());
 
 class _HomescreenState extends State<Homescreen> {
   DetailController detailController = Get.put(DetailController());
+
+  List<HomeModel> favList  = [];
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
-    final double itemWidth = size.width / 2;
+
+
 
     return SafeArea(
       child: Scaffold(
@@ -121,6 +123,7 @@ class _HomescreenState extends State<Homescreen> {
                       for (var x in querySnapshot!.docs) {
                         Map data = x.data() as Map;
                         HomeModel h1 = HomeModel(
+                          adminId: data['adminId'],
                             productId: x.id,
                             name: data['name'],
                             price: data['price'],
@@ -130,7 +133,7 @@ class _HomescreenState extends State<Homescreen> {
                             rating: int.parse(data['rating']),
                             categoryId: data['categoryId'],
                             userId: '${homeController.userId.value}');
-
+                        favList.add(h1);
                         productList.add(h1);
                       }
                        return GridView.builder(
@@ -149,6 +152,7 @@ class _HomescreenState extends State<Homescreen> {
                             Get.toNamed('/detail',arguments: productList[index]);
                           },
                           child: productBox(
+                            index,
                             productList[index].name!,
                             productList[index].img!,
                             productList[index].price!,
@@ -173,7 +177,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget productBox(String pName,String pImg, int price, int rating) {
+  Widget productBox(int i,String pName,String pImg, int price, int rating) {
     return Container(
       //color: Colors.grey,
       child: Column(
@@ -183,9 +187,9 @@ class _HomescreenState extends State<Homescreen> {
           Stack(
             children: [
               Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
-              Transform.translate(offset: Offset(32.w, 21.h),child: Container(
-                height: 5.h,
-                  width: 12.w,
+              Transform.translate(offset: Offset(34.w, 22.h),child: Container(
+                height: 4.5.h,
+                  width: 10.w,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.white54,
@@ -194,7 +198,21 @@ class _HomescreenState extends State<Homescreen> {
                       topLeft: Radius.circular(10)
                     ),
                   ),
-                  child: Icon(Icons.favorite,color: Colors.black,size: 19.sp,)),),
+                  child: InkWell(onTap: () async {
+
+                    Map<String, dynamic> m1 = {
+                      'name' : favList[i].name,
+                      'price' : favList[i].price,
+                      'quantity': 1,
+                      'img' : favList[i].img,
+                      'stock' : favList[i].stock,
+                      'rating' : favList[i].rating,
+                      'description' : favList[i].description,
+                      'categoryId' : favList[i].categoryId,
+                      'adminId' : favList[i].adminId,
+                    };
+                    await FirebaseHelper.firebaseHelper.addToFavourites(m1);
+                  },child: Icon(Icons.favorite,color: Colors.black,size: 15.sp,))),),
             ],
           ),
           SizedBox(height: 1.h,),
