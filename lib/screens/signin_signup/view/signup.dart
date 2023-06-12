@@ -53,11 +53,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     label: Text('Name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -75,11 +75,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     label: Text('Email',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -102,11 +102,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       label: Text('Password',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: BorderSide(color: Colors.grey,width: 1.5)
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                        borderSide: BorderSide(color: Colors.grey,width: 1),
                       ),
                     ),
                   ),
@@ -130,11 +130,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       label: Text('Confirm Password',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: BorderSide(color: Colors.grey,width: 1.5)
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                        borderSide: BorderSide(color: Colors.grey,width: 1),
                       ),
                     ),
                   ),
@@ -153,6 +153,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   if(msg=='Success')
                   {
                     print('$msg');
+                    Map<String ,dynamic> m1 = {
+                      'name' : name,
+                      'email' : email,
+                      'password' : password,
+                    };
+                    await FirebaseHelper.firebaseHelper.addLoginDetail(m1);
                     Get.back();
                   }
                   else

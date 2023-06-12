@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/detail/controller/detailcontroller.dart';
+import 'package:furniture_shopping_app/screens/profile/controller/profilecontroller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
@@ -22,9 +23,15 @@ HomeController homeController = Get.put(HomeController());
 
 class _HomescreenState extends State<Homescreen> {
   DetailController detailController = Get.put(DetailController());
-
+  ProfileController  profileController = Get.put(ProfileController());
   List<HomeModel> favList  = [];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileController.getUserDetail();
+  }
   @override
   Widget build(BuildContext context) {
 

@@ -82,7 +82,7 @@ class FirebaseHelper {
     String? email = user.email;
     String? img = user.photoURL;
     String? name = user.displayName;
-    Map m1 = {'email': email, 'img': img, 'name': name};
+    Map m1 = {'email': email, 'img': img, 'name': name };
     return m1;
   }
 
@@ -156,6 +156,34 @@ class FirebaseHelper {
     await firebaseFirestore.collection('Favourite').doc(userId).collection(
         'FavList').doc(docId).delete();
   }
+
+
+
+  // user profile detail
+
+  // profile data collection
+
+  // add profile
+
+  Future<void> addLoginDetail(Map<String,dynamic> m1)
+  async {
+    await firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').add(m1);
+  }
+
+  // read login detail
+  // Future<QuerySnapshot<Map<String, dynamic>>> readLoginDetail()
+  // async {
+  //
+  //  return firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').get();
+  // }
+  //
+  // // add shipping address
+  //
+  // Future<void> addShippingAddress(Map<String,dynamic> m1)
+  // async {
+  //    await firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').add(m1);
+  // }
+
 
 
 }

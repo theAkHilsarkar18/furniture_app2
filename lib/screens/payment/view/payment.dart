@@ -42,6 +42,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           splashColor: Colors.white12,
             onTap: () {
           paymentController.selectCardIndex(index+1);
+          
         },child: paymentBox(index+1)),itemCount: 3,),
       ),
     );
@@ -70,7 +71,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               cvv: "123",
               bankName: "Axis bank",
               //cardType: CardType.mastercard,
-              showBackSide: paymentController.cardSide.value,
+              showBackSide: false,
               frontBackground: CardBackgrounds.black,
               backBackground: CardBackgrounds.black,
               backTextColor: Colors.white,
