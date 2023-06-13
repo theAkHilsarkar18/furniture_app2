@@ -2,6 +2,7 @@ import 'package:awesome_card/credit_card.dart';
 import 'package:awesome_card/style/card_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_shopping_app/screens/checkout/controller/checkoutcontroller.dart';
 import 'package:furniture_shopping_app/screens/payment/controller/paymentcontroller.dart';
 import 'package:furniture_shopping_app/screens/payment/model/paymentmodel.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 PaymentController paymentController = Get.put(PaymentController());
+CheckoutController checkoutController = Get.put(CheckoutController());
 
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
@@ -29,6 +31,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            paymentController.totalCards.value = cardsList.length;
             Get.toNamed('/addcard');
           },
           child: Icon(
@@ -49,6 +52,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   fontSize: 14.sp)),
           leading: InkWell(
               onTap: () {
+
+
                 Get.back();
               },
               child: Icon(Icons.arrow_back, color: Colors.black, size: 16.sp)),
@@ -82,7 +87,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     await FirebaseHelper.firebaseHelper.deleteUserCard(cardsList[index].docId!);
                   },
                     onTap: () {
+                      checkoutController.cardNumber.value = cardsList[index].number!;
+                      checkoutController.bankName.value = cardsList[index].bank!;
+                      print('${checkoutController.cardNumber}=============');
                       paymentController.selectCardIndex(index + 1);
+
                     },
                     child: paymentBox(
                       index + 1,

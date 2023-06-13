@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/profile/controller/profilecontroller.dart';
+import 'package:furniture_shopping_app/screens/shipping/controller/shippingcontroller.dart';
 import 'package:furniture_shopping_app/screens/signin_signup/controller/signupcontroller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileController profileController = Get.put(ProfileController());
   SignupController signupController = Get.put(SignupController());
+  ShippingController shippingController = Get.put(ShippingController());
   @override
   void initState() {
     // TODO: implement initState
@@ -51,7 +53,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Obx(
                     () => CircleAvatar(
-
                       radius: 32.sp,
                       backgroundImage: profileController.img.isEmpty?NetworkImage('https://1fid.com/wp-content/uploads/2022/06/cool-profile-picture-2-1024x1024.jpg'):NetworkImage('${profileController.img.value}'),
                     ),
@@ -98,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: profileMenuBox(
                 profileController.profileMenuList[index].title!,
-                profileController.profileMenuList[index].description!,
+                index==1?'${shippingController.totalAddress.value} address':profileController.profileMenuList[index].description!,
               ),
             ),itemCount: profileController.profileMenuList.length,shrinkWrap: true,))),
           ],

@@ -29,7 +29,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
               Text('Your product will be delivered soon',style: GoogleFonts.overpass(fontSize: 12.sp,color: Colors.grey)),
               Text('Thank you for choosing our app !',style: GoogleFonts.overpass(fontSize: 12.sp,color: Colors.grey)),
               Spacer(),
-              trackBox(),
+              InkWell(onTap: () {
+                Get.toNamed('/order');
+              },child: trackBox()),
+              SizedBox(height: 1.h,),
               InkWell(onTap: () {
                 Get.offAndToNamed('/bar');
               },child: homeBox()),
@@ -44,7 +47,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
-      height: 7.h,
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,
@@ -59,7 +62,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
-      height: 7.h,
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,

@@ -2,6 +2,10 @@ import 'package:get/get.dart';
 
 class PaymentController extends GetxController
 {
+
+
+  RxInt totalCards = 0.obs;
+
   RxInt isSelected = 1.obs;
   void selectCardIndex(int index)
   {

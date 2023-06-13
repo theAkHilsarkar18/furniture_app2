@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/home/model/homemodel.dart';
+import 'package:furniture_shopping_app/screens/shipping/view/shipping.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -95,7 +96,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 FirebaseHelper.firebaseHelper.deleteCheckOutProducts(
                     checkOutList[i].productId!);
               }
-              Get.toNamed('/success');
+              Get.offAndToNamed('/success',);
             },child: checkoutBox()),
           ],
         ),
@@ -108,7 +109,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
-      height: 7.h,
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,
@@ -134,13 +135,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
            color: Colors.white,
            boxShadow: [ BoxShadow(color: Colors.black12,offset: Offset(0,5),blurRadius: 10,spreadRadius: 1)],
          ),
-         child: Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Text('Akhil Sodvadiya',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
-             Divider(),
-             Text('A-107, Khodiyar Chember, Anjani Nagar Society, Punagam, Surat - 395010',style: GoogleFonts.poppins(fontSize: 10.sp,color: Colors.grey)),
-           ],
+         child: Obx(
+           () =>  Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               Text('${checkoutController.addressName}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
+               Divider(),
+               Text('${checkoutController.address.value}, ${checkoutController.city.value} - 395010',style: GoogleFonts.poppins(fontSize: 10.sp,color: Colors.grey)),
+             ],
+           ),
          ),
        ),
     );
@@ -167,11 +170,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Axis',style: GoogleFonts.poppins(fontWeight: FontWeight.w700,color: Colors.red,fontSize: 15.sp)),
-                Text('bank',style: GoogleFonts.poppins(color: Colors.black,fontSize: 15.sp)),
+                Text('${checkoutController.bankName}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.red,fontSize: 15.sp)),
+                // Text('bank',style: GoogleFonts.poppins(color: Colors.black,fontSize: 15.sp)),
               ],
             ),
-            Text('**** **** **** 8956',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 11.sp)),
+            Text('${checkoutController.cardNumber}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 11.sp)),
           ],
         ),
       ),

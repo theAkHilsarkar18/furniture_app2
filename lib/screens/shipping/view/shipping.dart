@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_shopping_app/screens/checkout/controller/checkoutcontroller.dart';
 import 'package:furniture_shopping_app/screens/shipping/controller/shippingcontroller.dart';
 import 'package:furniture_shopping_app/screens/shipping/model/shipingmodel.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ class ShippingScreen extends StatefulWidget {
 }
 
 ShippingController shippingController = Get.put(ShippingController());
-
+CheckoutController checkoutController = Get.put(CheckoutController());
 class _ShippingScreenState extends State<ShippingScreen> {
   List<ShippingModel> addressList = [];
 
@@ -43,9 +44,11 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   fontSize: 14.sp)),
           leading: InkWell(
               onTap: () {
+                print('${addressList.length}=========');
+                shippingController.totalAddress.value = addressList.length;
                 Get.back();
               },
-              child: Icon(Icons.arrow_back, color: Colors.black, size: 16.sp)),
+              child: Icon(Icons.arrow_back, color: Colors.black, size: 15.sp)),
         ),
         body: StreamBuilder(
           stream: FirebaseHelper.firebaseHelper.readUserAddress(),
@@ -73,6 +76,12 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   itemBuilder: (context, index) => InkWell(
                       onTap: () {
                         shippingController.selectAddress(index + 1);
+                        checkoutController.addressName.value = addressList[index].name!;
+                        checkoutController.address.value = addressList[index].address!;
+                        checkoutController.city.value = addressList[index].city!;
+                        checkoutController.country.value = addressList[index].country!;
+                        checkoutController.state.value = addressList[index].state!;
+                        checkoutController.code.value = addressList[index].state!;
                       },
                     onDoubleTap: () async {
                       await FirebaseHelper.firebaseHelper.deleteUserAddress(addressList[index].docId!);
