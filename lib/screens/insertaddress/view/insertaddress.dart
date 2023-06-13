@@ -64,6 +64,7 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   controller: txtAddress,
+                  maxLines: 2,
                   keyboardType: TextInputType.streetAddress,
                   cursorColor: Colors.black,
                   style: GoogleFonts.poppins(letterSpacing: 1,color: Colors.black),
@@ -162,7 +163,8 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                   ),
                 ),
               ),
-              InkWell(onTap: () async {
+
+              GestureDetector(onTap: () async {
                 Map<String, dynamic> m1 = {
                   'name' : txtName.text,
                   'address' : txtAddress.text,
@@ -171,12 +173,13 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                   'city' : txtCity.text,
                   'zipcode' : txtZipcode.text,
                 };
-
-                await FirebaseHelper.firebaseHelper.addShippingAddress(m1);
-              },child: saveAddressBox()),
+                await FirebaseHelper.firebaseHelper.addUserAddress(m1);
+                Get.back();
+              },child: Align(heightFactor: 5,child: saveAddressBox())),
             ],
           ),
         ),
+
       ),
     );
   }
@@ -185,7 +188,7 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
   Widget saveAddressBox()
   {
     return Container(
-      margin: EdgeInsets.only(left: 10.sp,right: 10.sp,top: 140.sp),
+      margin: EdgeInsets.only(left: 10.sp,right: 10.sp,top: 10.sp),
       height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(

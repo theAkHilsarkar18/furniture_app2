@@ -7,4 +7,6 @@ class ShippingController extends GetxController
   {
     isSelected.value = index;
   }
+
+
 }

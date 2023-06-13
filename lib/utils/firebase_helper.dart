@@ -163,26 +163,59 @@ class FirebaseHelper {
 
   // profile data collection
 
-  // add profile
-
   Future<void> addLoginDetail(Map<String,dynamic> m1)
   async {
-    await firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').add(m1);
+    await firebaseFirestore.collection('UserDetail').doc(userId).collection('LoginDetail').add(m1);
   }
 
-  // read login detail
-  // Future<QuerySnapshot<Map<String, dynamic>>> readLoginDetail()
-  // async {
-  //
-  //  return firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').get();
-  // }
-  //
-  // // add shipping address
-  //
-  // Future<void> addShippingAddress(Map<String,dynamic> m1)
-  // async {
-  //    await firebaseFirestore.collection('UserProfile').doc(userId).collection('Profile').add(m1);
-  // }
+
+  // add user address
+
+  Future<void> addUserAddress(Map<String,dynamic> m1)
+  async {
+    getUserDetail();
+    print('user id : $userId');
+    await firebaseFirestore.collection('Address').doc(userId).collection('UserAddress').add(m1);
+  }
+
+  // read user address
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserAddress()
+  {
+    return firebaseFirestore.collection('Address').doc(userId).collection('UserAddress').snapshots();
+  }
+
+  // delete user address
+  Future<void> deleteUserAddress(String docId)
+  async {
+    await firebaseFirestore.collection('Address').doc(userId).collection(
+        'UserAddress').doc(docId).delete();
+  }
+
+
+  // add user payment detail;
+
+  Future<void> addUserCardDetail(Map<String,dynamic> m1)
+  async {
+    getUserDetail();
+    print('user id : $userId');
+    await firebaseFirestore.collection('Payment').doc(userId).collection('Card').add(m1);
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readPaymentDetail()
+  {
+    return firebaseFirestore.collection('Payment').doc(userId).collection('Card').snapshots();
+  }
+
+  // delete user card
+  Future<void> deleteUserCard(String docId)
+  async {
+    await firebaseFirestore.collection('Payment').doc(userId).collection(
+        'Card').doc(docId).delete();
+  }
+
+
+
 
 
 

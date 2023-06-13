@@ -7,4 +7,9 @@ class SignupController extends GetxController
   {
     isVisible.value = !isVisible.value;
   }
+
+
+  RxString name = ''.obs;
+  RxString email = ''.obs;
+  RxString password = ''.obs;
 }

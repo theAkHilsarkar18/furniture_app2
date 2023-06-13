@@ -6,6 +6,7 @@ import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_credit_card/glassmorphism_config.dart';
 import 'package:furniture_shopping_app/screens/addcard/controller/addpaymenrcontrolerr.dart';
+import 'package:furniture_shopping_app/utils/firebase_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
@@ -216,7 +217,21 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
                 ),
               ),
 
-              saveCardBox()
+              GestureDetector(onTap: () async {
+
+                Map<String, dynamic> m1 = {
+
+                  'name' : txtName.text,
+                  'number' : txtNumber.text,
+                  'bank' : txtBank.text,
+                  'date' : txtDate.text,
+                  'cvv' : txtCvv.text,
+
+
+                };
+                await FirebaseHelper.firebaseHelper.addUserCardDetail(m1);
+                Get.back();
+              },child: Align(heightFactor: 2,child: saveCardBox()))
             ],
           ),
         ),

@@ -36,7 +36,7 @@ async {
       builder: (context, orientation, deviceType) => GetMaterialApp(
         theme: ThemeData(
           useMaterial3: true,
-          textTheme: TextTheme()
+          textTheme: TextTheme(),
         ),
         initialRoute: '/',
         debugShowCheckedModeBanner: false,

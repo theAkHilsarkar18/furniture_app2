@@ -152,13 +152,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   String msg = await FirebaseHelper.firebaseHelper.signUp(email: email, password: password, name: name);
                   if(msg=='Success')
                   {
-                    print('$msg');
-                    Map<String ,dynamic> m1 = {
-                      'name' : name,
-                      'email' : email,
-                      'password' : password,
-                    };
-                    await FirebaseHelper.firebaseHelper.addLoginDetail(m1);
+                    signupController.name.value = name;
+                    signupController.email.value = email;
+                    signupController.password.value = password;
                     Get.back();
                   }
                   else
@@ -197,7 +193,7 @@ class _SignupScreenState extends State<SignupScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),
-      height: 7.h,
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,

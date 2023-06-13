@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shopping_app/screens/profile/controller/profilecontroller.dart';
+import 'package:furniture_shopping_app/screens/signin_signup/controller/signupcontroller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../utils/firebase_helper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -14,12 +17,19 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileController profileController = Get.put(ProfileController());
-
+  SignupController signupController = Get.put(SignupController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     profileController.getUserDetail();
+
+    // Map<String, dynamic> m1 = {
+    //   'name' : signupController.name.value,
+    //   'email' : signupController.email.value,
+    //   'password' : signupController.password.value
+    // };
+    // FirebaseHelper.firebaseHelper.addLoginDetail(m1);
   }
 
   @override
