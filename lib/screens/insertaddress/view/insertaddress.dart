@@ -37,7 +37,7 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
           title: Text('Add shipping address',style: GoogleFonts.overpass(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 15.sp)),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
               Padding(
@@ -51,11 +51,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('Full name',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -72,11 +72,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('Address',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -92,11 +92,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('Country',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -112,11 +112,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('State',style: GoogleFonts.poppins(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -132,11 +132,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('City',style: GoogleFonts.poppins(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),
@@ -154,11 +154,11 @@ class _InsertAddressScreenState extends State<InsertAddressScreen> {
                     label: Text('Zipcode (Postal Code)',style: GoogleFonts.poppins(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                      borderSide: BorderSide(color: Colors.grey,width: 1),
                     ),
                   ),
                 ),

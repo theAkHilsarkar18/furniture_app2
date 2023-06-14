@@ -88,12 +88,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             ),
             deliveryBox(),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 4.h,),
             totalBox(),
             Spacer(),
             InkWell(onTap: () {
               for(int i=0; i<checkOutList.length; i++) {
-                FirebaseHelper.firebaseHelper.deleteCheckOutProducts(
+                FirebaseHelper.firebaseHelper.deleteCartData(
                     checkOutList[i].productId!);
               }
               Get.offAndToNamed('/success',);
@@ -116,14 +116,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         borderRadius: BorderRadius.circular(10),
       ),
       alignment: Alignment.center,
-      child: Text('Check out',style: GoogleFonts.overpass(color: Colors.white,letterSpacing: 1,fontSize: 13.sp)),
+      child: Text('Submit order',style: GoogleFonts.overpass(color: Colors.white,letterSpacing: 1,fontSize: 13.sp)),
     );
   }
 
   Widget addressBox()
   {
     return Container(
-      height: 14.h,
+      height: 13.h,
       width: MediaQuery.of(context).size.width,
       child: Container(
          padding: EdgeInsets.all(10),
@@ -135,16 +135,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
            color: Colors.white,
            boxShadow: [ BoxShadow(color: Colors.black12,offset: Offset(0,5),blurRadius: 10,spreadRadius: 1)],
          ),
-         child: Obx(
-           () =>  Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-               Text('${checkoutController.addressName}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
-               Divider(),
-               Text('${checkoutController.address.value}, ${checkoutController.city.value} - 395010',style: GoogleFonts.poppins(fontSize: 10.sp,color: Colors.grey)),
-             ],
-           ),
+         child:  Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             Text('Akhil Sodvadiya',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
+             Divider(),
+             Text('A-107, Khodiyar Chembers, Anjani Nagar Society , Punagam , Surat , Gujrat , India - 395010',style: GoogleFonts.poppins(fontSize: 10.sp,color: Colors.grey)),
+           ],
          ),
+
        ),
     );
   }
@@ -170,11 +169,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('${checkoutController.bankName}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.red,fontSize: 15.sp)),
-                // Text('bank',style: GoogleFonts.poppins(color: Colors.black,fontSize: 15.sp)),
+                Text('Kotak',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.red,fontSize: 15.sp)),
+                Text('bank',style: GoogleFonts.poppins(color: Colors.black,fontSize: 15.sp)),
               ],
             ),
-            Text('${checkoutController.cardNumber}',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 11.sp)),
+            Text('**** **** **** 9630',style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 13.sp)),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:furniture_shopping_app/screens/addcard/view/addpayment.dart';
 import 'package:furniture_shopping_app/screens/bell/view/bellscreen.dart';
 import 'package:furniture_shopping_app/screens/cart/view/cartscreen.dart';
@@ -31,6 +32,7 @@ async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseHelper.firebaseHelper.getUserDetail();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.white));
   runApp(
     Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(

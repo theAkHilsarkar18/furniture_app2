@@ -43,10 +43,10 @@ class FirebaseHelper {
   }
 
   /// google sign in method
-  Future<String> googleSignIn() async {
+  Future<String> signInThroughGoogle() async {
+
     GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!
-        .authentication;
+    GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
     // create a new credential
     var credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -126,7 +126,7 @@ class FirebaseHelper {
 
   // delete from checkout because data transferred in order
 
-  Future<void> deleteCheckOutProducts(String docId) async {
+  Future<void> deleteCartProducts(String docId) async {
     await firebaseFirestore.collection('AddToCart').doc(userId).collection(
         'Cart').doc(docId).delete();
   }

@@ -62,11 +62,11 @@ class _SigninScreenState extends State<SigninScreen> {
                       label: Text('Email',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
+                        borderSide: BorderSide(color: Colors.grey,width: 1.5)
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                        borderSide: BorderSide(color: Colors.grey,width: 1),
                       ),
                     ),
                   ),
@@ -90,11 +90,11 @@ class _SigninScreenState extends State<SigninScreen> {
                         label: Text('Password',style: GoogleFonts.overpass(color: Colors.grey,fontSize: 15,letterSpacing: 1)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.grey)
+                            borderSide: BorderSide(color: Colors.grey,width: 1.5)
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey,width: 0.5),
+                          borderSide: BorderSide(color: Colors.grey,width: 1),
                         ),
                       ),
                     ),
@@ -139,7 +139,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 SizedBox(height: 20,),
                 Text('OR',style: GoogleFonts.poppins(color: Colors.black54,fontSize: 10,letterSpacing: 1)),
                 InkWell(onTap: () async {
-                  String msg = await FirebaseHelper.firebaseHelper.googleSignIn();
+                  String msg = await FirebaseHelper.firebaseHelper.signInThroughGoogle();
                   if(msg=='Success')
                     {
                       Get.offAndToNamed('/bar');
@@ -162,7 +162,7 @@ class _SigninScreenState extends State<SigninScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),
-      height: 7.h,
+      height: 6.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,

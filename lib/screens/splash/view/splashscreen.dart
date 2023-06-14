@@ -32,43 +32,41 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 4), () {
       Get.offAndToNamed(isLogin ? '/bar' : introController.introWatched.value?'/signin':'/intro');
     });
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Spacer(),
-              Container(
-                height: 32.h,
-                width: 100.w,
-                child: Image.asset('assets/logo/splash.png'),
-              ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text('Lovely',
-              //         style: GoogleFonts.kalam(
-              //             color: Color(0xffff5256),
-              //             fontSize: 25.sp,
-              //             fontWeight: FontWeight.w700)),
-              //     Text('Rooms',
-              //         style: GoogleFonts.pacifico(
-              //             color: Colors.blue,
-              //             fontSize: 20.sp,
-              //             fontWeight: FontWeight.w700)),
-              //   ],
-              // ),
-              Spacer(),
-              Text('by TheAkhilSarkar',
-                  style: GoogleFonts.poppins(
-                      color: Colors.black54, fontSize: 13.sp)),
-              SizedBox(
-                height: 1.h,
-              ),
-            ],
-          ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Spacer(),
+            Container(
+              height: 32.h,
+              width: 100.w,
+              child: Image.asset('assets/logo/splash.png'),
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text('Lovely',
+            //         style: GoogleFonts.kalam(
+            //             color: Color(0xffff5256),
+            //             fontSize: 25.sp,
+            //             fontWeight: FontWeight.w700)),
+            //     Text('Rooms',
+            //         style: GoogleFonts.pacifico(
+            //             color: Colors.blue,
+            //             fontSize: 20.sp,
+            //             fontWeight: FontWeight.w700)),
+            //   ],
+            // ),
+            Spacer(),
+            Text('by TheAkhilSarkar',
+                style: GoogleFonts.poppins(
+                    color: Colors.black54, fontSize: 13.sp)),
+            SizedBox(
+              height: 1.h,
+            ),
+          ],
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_shopping_app/screens/cart/controller/cartcontroller.dart';
 import 'package:furniture_shopping_app/screens/detail/controller/detailcontroller.dart';
 import 'package:furniture_shopping_app/screens/profile/controller/profilecontroller.dart';
 import 'package:furniture_shopping_app/screens/signin_signup/controller/signupcontroller.dart';
@@ -26,6 +27,7 @@ class _HomescreenState extends State<Homescreen> {
   DetailController detailController = Get.put(DetailController());
   ProfileController  profileController = Get.put(ProfileController());
   SignupController signupController = Get.put(SignupController());
+  CartController cartController = Get.put(CartController());
   List<HomeModel> favList  = [];
 
   @override
@@ -72,6 +74,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
 
                   InkWell(onTap: () {
+                    cartController.total.value = 0;
                     Get.toNamed('/cart');
                   },child: Icon(Icons.shopping_cart_outlined,color: Colors.grey,size: 20.sp,)),
                 ],
@@ -147,8 +150,8 @@ class _HomescreenState extends State<Homescreen> {
                        return GridView.builder(
                         physics: BouncingScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10.sp,
+                          mainAxisSpacing: 10.sp,
                           childAspectRatio: 9/16,
                           crossAxisCount: 2,
                         ),
@@ -194,8 +197,8 @@ class _HomescreenState extends State<Homescreen> {
           SizedBox(height: 2,),
           Stack(
             children: [
-              Container(height: 26.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
-              Transform.translate(offset: Offset(34.w, 22.h),child: Container(
+              Container(height: 29.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
+              Transform.translate(offset: Offset(34.w, 24.5.h),child: Container(
                 height: 4.5.h,
                   width: 10.w,
                   alignment: Alignment.center,

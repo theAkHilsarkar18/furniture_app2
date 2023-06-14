@@ -32,7 +32,7 @@ class ProfileController extends GetxController
     // Map? user = snapshot.docs as Map;
     // String userName = user['name'];
 
-    name.value = m1['name']==null ? 'default name' : m1['name'];
+    name.value = m1['name']==null ? 'your name' : m1['name'];
     email.value = m1['email'];
     img.value = m1['img']==null ? 'https://1fid.com/wp-content/uploads/2022/06/cool-profile-picture-2-1024x1024.jpg' : m1['img'];
     print('$name ============');
