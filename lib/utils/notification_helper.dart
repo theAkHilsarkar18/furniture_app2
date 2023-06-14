@@ -6,11 +6,11 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:http/http.dart' as http;
 
-class FirebaseNotification
+class FirebaseNotificationHelper
 {
   /// singleton object
-  static FirebaseNotification firebaseNotification = FirebaseNotification._();
-  FirebaseNotification._();
+  static FirebaseNotificationHelper firebaseNotificationHelper = FirebaseNotificationHelper._();
+  FirebaseNotificationHelper._();
 
   /// local notification plugin object
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -113,7 +113,7 @@ class FirebaseNotification
       {
         String? title = event.notification!.title;
         String? body = event.notification!.body;
-        FirebaseNotification.firebaseNotification.showFirebasePushNotification(title!, body!);
+        FirebaseNotificationHelper.firebaseNotificationHelper.showFirebasePushNotification(title!, body!);
       }
     });
 

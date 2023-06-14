@@ -24,6 +24,7 @@ import 'package:furniture_shopping_app/screens/signin_signup/view/signup.dart';
 import 'package:furniture_shopping_app/screens/splash/view/splashscreen.dart';
 import 'package:furniture_shopping_app/screens/success/view/success.dart';
 import 'package:furniture_shopping_app/utils/firebase_helper.dart';
+import 'package:furniture_shopping_app/utils/notification_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,6 +32,7 @@ Future<void> main()
 async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseNotificationHelper.firebaseNotificationHelper.initNotification();
   FirebaseHelper.firebaseHelper.getUserDetail();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.white));
   runApp(
