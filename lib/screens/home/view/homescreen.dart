@@ -197,8 +197,8 @@ class _HomescreenState extends State<Homescreen> {
           SizedBox(height: 2,),
           Stack(
             children: [
-              Container(height: 29.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
-              Transform.translate(offset: Offset(34.w, 24.5.h),child: Container(
+              Container(height: 27.5.h, width: 44.w, child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.network('$pImg',fit: BoxFit.cover,))),
+              Transform.translate(offset: Offset(34.w, 23.h),child: Container(
                 height: 4.5.h,
                   width: 10.w,
                   alignment: Alignment.center,

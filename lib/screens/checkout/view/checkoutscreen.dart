@@ -123,7 +123,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget addressBox()
   {
     return Container(
-      height: 13.h,
+      height: 15.5.h,
       width: MediaQuery.of(context).size.width,
       child: Container(
          padding: EdgeInsets.all(10),

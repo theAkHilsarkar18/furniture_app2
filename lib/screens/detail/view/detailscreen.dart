@@ -317,7 +317,7 @@ class _DetailscreenState extends State<Detailscreen> {
         child: Row(
           children: [
             Container(
-              height: 15.h,
+              height: 16.h,
               width: 45.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.sp),
@@ -340,7 +340,7 @@ class _DetailscreenState extends State<Detailscreen> {
             ),
             SizedBox(width: 2.w,),
             Container(
-              height: 15.h,
+              height: 16.h,
               width: 45.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.sp),
@@ -363,7 +363,7 @@ class _DetailscreenState extends State<Detailscreen> {
             ),
             SizedBox(width: 2.w,),
             Container(
-              height: 15.h,
+              height: 16.h,
               width: 45.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.sp),
@@ -403,12 +403,15 @@ class _DetailscreenState extends State<Detailscreen> {
 
           children: [
             Container(
-             height: 10.h,
-              width: 20.w,
+             height: 11.h,
+              width: 22.w,
               decoration: BoxDecoration(
                 //color: Colors.grey
               ),
+              alignment: Alignment.center,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     height: 6.h,
@@ -513,8 +516,8 @@ class _DetailscreenState extends State<Detailscreen> {
             ),
             SizedBox(width: 2.w,),
             Container(
-              height: 11.h,
-              width: 18.w,
+              height: 13.h,
+              width: 19.w,
               decoration: BoxDecoration(
                 //color: Colors.grey
               ),
@@ -547,7 +550,7 @@ class _DetailscreenState extends State<Detailscreen> {
     return Padding(
       padding: EdgeInsets.only(left: 15.sp,top: 10.sp,right: 15.sp,bottom: 10.sp),
       child: Container(
-        height: 35.h,
+        height: 42.h,
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -591,7 +594,7 @@ class _DetailscreenState extends State<Detailscreen> {
   {
     return Container(
       margin: EdgeInsets.all(10),
-      height: 20.h,
+      height: 22.h,
       width: 70.w,
       decoration: BoxDecoration(
         color: Colors.white,

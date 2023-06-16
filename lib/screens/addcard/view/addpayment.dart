@@ -54,6 +54,8 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
                     addPaymentController.changeCardSide();
                   },
                   child: CreditCard(
+                    height: 28.h,
+                      width:  MediaQuery.of(context).size.width,
                       cardNumber: "${addPaymentController.number}",
                       cardExpiry: "${addPaymentController.expDate}",
                       cardHolderName: "${addPaymentController.name}",
@@ -231,7 +233,7 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
                 };
                 await FirebaseHelper.firebaseHelper.addUserCardDetail(m1);
                 Get.back();
-              },child: Align(heightFactor: 2,child: saveCardBox()))
+              },child: Align(heightFactor: 0.5,child: saveCardBox()))
             ],
           ),
         ),
@@ -246,7 +248,7 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
       () =>  Column(
         children: [
           Container(
-            height: 25.h,
+            height: 29.h,
             width: 87.w,
             margin: EdgeInsets.only(left: 5.sp,right: 5.sp,top: 10.sp),
             decoration: BoxDecoration(
@@ -336,7 +338,7 @@ class _AddPaymentCardScreenState extends State<AddPaymentCardScreen> {
   {
     return Container(
       margin: EdgeInsets.only(left: 15.sp,right: 15.sp,top: 40.sp),
-      height: 6.h,
+      height: 6.5.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black,
