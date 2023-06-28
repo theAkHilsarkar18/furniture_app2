@@ -42,7 +42,7 @@ async {
           useMaterial3: true,
           textTheme: TextTheme(),
         ),
-        initialRoute: '/',
+       // initialRoute: '/',
         debugShowCheckedModeBanner: false,
         getPages: [
           GetPage(name: '/',page: () => SplashScreen(),transition: Transition.cupertinoDialog),
